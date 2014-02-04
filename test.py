@@ -42,16 +42,18 @@ class Var_yi(SimpleComponent):
         self.localSize = 1
 
 
-main = \
-    SerialComponent('main',[
-        Var_x0(), 
-        ParallelComponent('pts',[
-                    SerialComponent('pt',[
-                            Var_xi(i),
-                            Var_yi(i),
-                            ],i) 
-                    for i in range(2)]),
-        ])
+#setting up multiple copies for multi-point
+s_comps = []
+var_list = [Var_xi(i),Var_yi(i)]
+for i in xrange(2):
+    s_comp = SerialComponent('pt', var_list ,i) 
+    s_comps.append(s_comp)
+
+#explicit parallelization for multi-point
+p_comp = ParallelComponent('pts', s_comps)
+
+#top of level execution
+main = SerialComponent('main',[ Var_x0(), p_comp,])
     
 print main.variables
 main.initialize()
