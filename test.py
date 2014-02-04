@@ -44,8 +44,8 @@ class Var_yi(SimpleComponent):
 
 #setting up multiple copies for multi-point
 s_comps = []
-var_list = [Var_xi(i),Var_yi(i)]
 for i in xrange(2):
+    var_list = [Var_xi(i),Var_yi(i)] #a Component is defined as a collection of specific variables!
     s_comp = SerialComponent('pt', var_list ,i) 
     s_comps.append(s_comp)
 
