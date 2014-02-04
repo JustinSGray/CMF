@@ -103,7 +103,7 @@ class Component(object):
     def _apply_dCdv(self, arguments):
         pass
 
-    def _apply_dCdv_T(self, arguments)):
+    def _apply_dCdv_T(self, arguments):
         pass
 
     def _evaluate_C_inv(self):
@@ -227,16 +227,16 @@ class ExplicitVariable(SimpleComponent):
         self.cVec[n,c][:] = 0.0
         self._solve(self)
 
-    def _apply_dCdv(self, arguments)):
+    def _apply_dCdv(self, arguments):
         n,c = self.name, self.copy
-        self._apply_Jacobian(self, arguments))
+        self._apply_Jacobian(self, arguments)
         self.yVec[n,c][:] *= -1.0
         self.yVec[n,c][:] += self.xVec[n,c][None,None][:]
 
-    def _apply_dCdv_T(self, arguments)):
+    def _apply_dCdv_T(self, arguments):
         n,c = self.name, self.copy
         self.yVec[n,c][:] *= -1.0
-        self._apply_Jacobian_T(self, arguments))
+        self._apply_Jacobian_T(self, arguments)
         self.yVec[n,c][:] *= -1.0
         self.xVec[n,c][None,None][:] += self.yVec[n,c][:]
 
@@ -252,10 +252,10 @@ class IndependentVariable(SimpleComponent):
         self.cVec[n,c][:] = 0.0
         self.vVec[n,c][:] = self.value[:]
 
-    def _apply_dCdv(self, arguments)):
+    def _apply_dCdv(self, arguments):
         self.yVec[n,c][:] = self.xVec[n,c][None,None][:]
 
-    def _apply_dCdv_T(self, arguments)):
+    def _apply_dCdv_T(self, arguments):
         self.xVec[n,c][None,None][:] += self.yVec[n,c][:]
 
     def _evaluate_C_inv(self):
